@@ -1,0 +1,87 @@
+[
+  {
+    "mode": "shadow",
+    "gate_id": "g-example",
+    "gate_version": "1.0.0",
+    "rules_path": "instances/example/gates/example_gate.lp",
+    "rules_evaluated": {
+      "r1_per_unit_cap": "Per-unit cap (allocation \u2264 cap)",
+      "r2_pool_cap": "Pool cap (total \u2264 pool fraction)",
+      "r3_round_delta": "Per-round delta (increase \u2264 max fraction of current)",
+      "r4_score_floor": "Score floor (no increase below the score floor)",
+      "r5_drawdown_killswitch": "Drawdown kill-switch (\u2264 max \u2192 retreat only)"
+    },
+    "proposal": {
+      "unit": "unit-a",
+      "action": "increase",
+      "new_alloc": 1.1,
+      "delta": 0.1,
+      "rationale": "modest add after positive signal"
+    },
+    "grounded_facts": {
+      "unit": "unit-a",
+      "current_alloc": 1.0,
+      "score": 0.018,
+      "drawdown": -0.12,
+      "pool_total": 8.0,
+      "other_alloc": 1.0
+    },
+    "verdict": "PERMITTED",
+    "violations": [],
+    "prior_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "entry_hash": "71d6247a47c0260fcefdabb47a6b91e6ba5375142b97796f18cbbeb7795cfcc0",
+    "attestation_id": "71d6247a47c0260f"
+  },
+  {
+    "mode": "shadow",
+    "gate_id": "g-example",
+    "gate_version": "1.0.0",
+    "rules_path": "instances/example/gates/example_gate.lp",
+    "rules_evaluated": {
+      "r1_per_unit_cap": "Per-unit cap (allocation \u2264 cap)",
+      "r2_pool_cap": "Pool cap (total \u2264 pool fraction)",
+      "r3_round_delta": "Per-round delta (increase \u2264 max fraction of current)",
+      "r4_score_floor": "Score floor (no increase below the score floor)",
+      "r5_drawdown_killswitch": "Drawdown kill-switch (\u2264 max \u2192 retreat only)"
+    },
+    "proposal": {
+      "unit": "unit-b",
+      "action": "increase",
+      "new_alloc": 1.5,
+      "delta": 0.5,
+      "rationale": "add into a decline"
+    },
+    "grounded_facts": {
+      "unit": "unit-b",
+      "current_alloc": 1.0,
+      "score": -0.021,
+      "drawdown": -0.55,
+      "pool_total": 8.0,
+      "other_alloc": 1.1
+    },
+    "verdict": "REFUSED",
+    "violations": [
+      {
+        "rule_id": "r3_round_delta",
+        "rule": "Per-round delta (increase \u2264 max fraction of current)",
+        "actual": 0.5,
+        "limit": 0.2
+      },
+      {
+        "rule_id": "r4_score_floor",
+        "rule": "Score floor (no increase below the score floor)",
+        "actual": -0.021,
+        "limit": 0.0
+      },
+      {
+        "rule_id": "r5_drawdown_killswitch",
+        "rule": "Drawdown kill-switch (\u2264 max \u2192 retreat only)",
+        "actual": "increase",
+        "limit": -0.55
+      }
+    ],
+    "prior_hash": "71d6247a47c0260fcefdabb47a6b91e6ba5375142b97796f18cbbeb7795cfcc0",
+    "entry_hash": "2b9fdf03b578897029b0dfe61bd4bfd2c9bf9186990a516ed08e44273241ab13",
+    "attestation_id": "2b9fdf03b5788970"
+  }
+]

@@ -1,0 +1,16 @@
+apiVersion: agent-atlas/v1
+kind: Gate
+id: g-example
+version: 1.0.0
+owner: almanac-orchestrator
+description: >-
+  Illustrative allocation gate (toy). Proves a proposed allocation adjustment against five
+  abstract limits before it may take effect. Demonstrates the proof spine; not a real policy.
+transition: propose -> act
+reasoner:
+  engine: asp
+  impl: clingo
+  version: 5.8.0
+rules_ref: instances/example/gates/example_gate.lp
+fact_schema: instances/example/facts.py
+mode: shadow
